@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>minnal</title>
+    <title>arcanium</title>
     
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+
+<template id="list-item-template">
+    <li class="bookmark-item">
+        <div class="bookmark-title"></div>
+        <div class="bookmark-link"></div>
+    </li>
+</template>
 
 <div id="overlay" class="overlay"></div>
 
@@ -26,14 +33,21 @@
     </div>
 </div>
 
-<div id="dialog" class="dialog">
-    <div id="keyword-box" class="search-box">
-        <input id="keyword-input" class="search-input" type="text" name="" placeholder="keyword">
+
+
+<section id="bookmark-section" class="bookmark-section">
+    <ul id="bookmark-list" class="bookmark-list">
+    </ul>
+    
+    <div id="dialog" class="dialog">
+        <div id="keyword-box" class="search-box">
+            <input id="keyword-input" class="search-input" type="text" name="" placeholder="keyword">
+        </div>
+        <div id="url-box" class="search-box">
+            <input id="url-input" class="search-input" type="text" name="" placeholder="with https://">
+        </div>
     </div>
-    <div id="url-box" class="search-box">
-        <input id="url-input" class="search-input" type="text" name="" placeholder="with https://">
-    </div>
-</div>
+</section>
 
 </body>
 </html>

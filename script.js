@@ -37,6 +37,48 @@ function getUrls()
     }
 }
 
+function clearBookmarkList()
+{
+    while (bookmarklist.lastElementChild)
+    {
+        bookmarklist.removeChild(bookmarklist.lastElementChild);
+    }
+}
+
+function showFilteredBookmarks(filter)
+{
+    const result = [];
+    urlMap.forEach((value, key) =>
+    {
+        if (key.startsWith(filter))
+        {
+            result.push({key, value});
+        }
+    });
+
+    console.log(result);
+
+    clearBookmarkList();
+
+    let listItemTemplate = document.querySelector("#list-item-template");
+    console.log(listItemTemplate);
+
+
+
+    result.forEach((element, index) => {
+        let listItemClone = listItemTemplate.content.cloneNode(true);
+
+        const itemTitle = listItemClone.querySelector(".bookmark-title");
+        itemTitle.innerText = element.key;
+
+        const itemLink = listItemClone.querySelector(".bookmark-link");
+        itemLink.innerText = element.value;
+
+        // Append the cloned list item to the <ul>
+        bookmarklist.appendChild(listItemClone);
+    });
+}
+
 getUrls();
 
 const overlay = document.querySelector('#overlay');
@@ -45,6 +87,7 @@ const queryoverlay = document.querySelector('#query-container');
 const quickaccess = document.querySelector('#quickaccess');
 const searchbox = document.querySelector('#search-box');
 const searchinput = document.querySelector('#search-input');
+const bookmarklist = document.querySelector('#bookmark-list');
 const dialog = document.querySelector('#dialog');
 const keyinput = document.querySelector('#keyword-input');
 const urlinput = document.querySelector('#url-input');
@@ -69,10 +112,13 @@ function closeEverything()
     queryoverlay.classList.remove("active");
     searchbox.classList.remove("active");
     dialog.classList.remove("active");
+    bookmarklist.classList.remove("active");
     searchinput.value = "";
     quickaccess.value = "";
     keyinput.value = "";
     urlinput.value = "";
+
+    clearBookmarkList();
 
     quickaccess.focus();
 }
@@ -154,6 +200,9 @@ document.addEventListener("keydown", function (event)
 
             overlay.classList.add("active");
             dialog.classList.add("active");
+            bookmarklist.classList.add("active");
+
+            showFilteredBookmarks("");
 
             keyinput.focus();
         }
@@ -186,4 +235,9 @@ document.addEventListener("keydown", function (event)
     // {
     //     if (event.preventDefault) event.preventDefault();
     // }
+});
+
+keyinput.addEventListener('input', function ()
+{
+    showFilteredBookmarks(keyinput.value);
 });
