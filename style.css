@@ -1,0 +1,178 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "JetBrains Mono ExtraBold", sans-serif;
+
+    background: #0B1014 url("res/jinx-toy-8k.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+}
+
+.overlay {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.0);
+
+    transition: all 0.5s;
+    z-index: -1;
+}
+
+.overlay.active {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#quickaccess {
+    all: unset;
+
+    box-sizing: border-box;
+    outline: none;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    padding: 0;
+    caret-color: transparent;
+    cursor: default;
+
+    color: #DF00FF;
+    font-size: 200px;
+    text-align: center;
+    width: 100%;
+
+    margin-top: 25vh;
+    height: 30vh;
+
+    visibility: visible;
+}
+
+.search-box {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: rgba(45, 99, 139, 0.48);
+    height: 50px;
+    border-radius: 50px;
+    padding: 10px;
+    opacity: 0;
+
+    transition: 0.4s;
+}
+
+.search-box.active {
+    opacity: 1;
+}
+
+.search-box.active > .search-input {
+    width: 80vh;
+    padding: 0 6px;
+
+    opacity: 1;
+}
+
+.search-box.active > .search-button {
+    background: #154259;
+    color: #DF00FF;
+
+    opacity: 1;
+}
+
+.search-button {
+    color: #154259;
+    float: right;
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+    border-radius: 50%;
+    border-bottom-color: #DF00FF;
+    border-right-color: #DF00FF;
+    border-top-color: #DF00FF;
+    border-left-color: #DF00FF;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    padding: 10px;
+
+    opacity: 0;
+    visibility: visible;
+}
+
+.search-input {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #DF00FF;
+    font-size: 20px;
+    transition: 0.4s;
+    line-height: 50px;
+    width: 0px;
+
+    opacity: 0;
+    visibility: visible;
+}
+
+.dialog.active .search-box {
+    opacity: 1;
+}
+
+.dialog.active .search-input {
+    width: 80vh;
+    padding: 0 6px;
+
+    opacity: 1;
+}
+
+.dialog.active .search-button {
+    background: #6A7E97;
+    color: #2f3640;
+
+    opacity: 1;
+}
+
+.dialog {
+    position: absolute;
+    top: 10vh;
+    bottom: auto;
+
+    width: 100%;
+    height: 60%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+.dialog.active {
+    visibility: visible;
+}
+
+#keyword-box {
+    position: unset;
+    top: unset;
+    transform: unset;
+}
+
+#url-box {
+    position: unset;
+    top: unset;
+    margin-top: 20px;
+    transform: unset;
+}
