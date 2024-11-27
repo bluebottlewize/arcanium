@@ -6,6 +6,7 @@
     --transparent-color: rgba(0, 0, 0, 0.0);
     --text-color: #e25fff;
     --hint-color: rgba(229, 154, 238, 0.75);
+    --black: #000101;
 
     --quick-access-suggestion-color: rgba(108, 127, 152, 0.55);
 }
@@ -25,7 +26,7 @@ body, html {
 body {
     font-family: "jetbrains-mono", sans-serif;
 
-    background: #000101;
+    background: var(--black);
     background-size: cover;
     background-repeat: no-repeat;
 
