@@ -1,12 +1,31 @@
+:root {
+    --primary-color: rgba(45, 99, 139, 0.48);
+    --secondary-color: #2ecc71;
+    --background-color: #154259;
+    --overlay-color: rgba(0, 0, 0, 0.5);
+    --transparent-color: rgba(0, 0, 0, 0.0);
+    --text-color: #e25fff;
+    --hint-color: rgba(229, 154, 238, 0.75);
+
+    --quick-access-suggestion-color: rgba(108, 127, 152, 0.55);
+}
+
+@font-face {
+    font-family: 'jetbrains-mono';
+    src: url("./fonts/jetbrains-mono/JetBrainsMono-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body, html {
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: "JetBrains Mono ExtraBold", sans-serif;
+    font-family: "jetbrains-mono", sans-serif;
 
-    background: #0B1014;
+    background: #000101;
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -37,7 +56,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: var(--transparent-color);
 
     transition: all 0.5s;
     z-index: -1;
@@ -45,7 +64,7 @@ body {
 
 .overlay.active {
     visibility: visible;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--overlay-color);
 }
 
 .quickaccess {
@@ -62,7 +81,7 @@ body {
     caret-color: transparent;
     cursor: default;
 
-    color: #DF00FF;
+    color: var(--text-color);
     font-size: 200px;
     text-align: center;
     width: 100%;
@@ -73,14 +92,8 @@ body {
     visibility: visible;
 }
 
-.quickaccess::before {
-    content: "   ";
-    font-size: inherit;
-    display: inline-block;
-}
-
 #quickaccess-suggestion {
-    color: rgba(108, 127, 152, 0.55);
+    color: var(--quick-access-suggestion-color);
     z-index: -1;
 }
 
@@ -89,7 +102,7 @@ body {
     top: 30%;
     left: 50%;
     transform: translate(-50%, 50%);
-    background: rgba(45, 99, 139, 0.48);
+    background: var(--primary-color);
     height: 50px;
     border-radius: 10px;
     padding: 10px;
@@ -110,24 +123,24 @@ body {
 }
 
 .search-box.active > .search-button {
-    background: #154259;
-    color: #DF00FF;
+    background: var(--background-color);
+    color: var(--text-color);
 
     opacity: 1;
 }
 
 .search-button {
-    color: #154259;
+    color: var(--background-color);
     float: right;
     width: 50px;
     height: 50px;
     border-width: 3px;
     border-radius: 50%;
-    border-bottom-color: #DF00FF;
-    border-right-color: #DF00FF;
-    border-top-color: #DF00FF;
-    border-left-color: #DF00FF;
-    background: #2f3640;
+    border-bottom-color: var(--text-color);
+    border-right-color: var(--text-color);
+    border-top-color: var(--text-color);
+    border-left-color: var(--text-color);
+    background: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,7 +157,7 @@ body {
     outline: none;
     float: left;
     padding: 0;
-    color: #DF00FF;
+    color: var(--text-color);
     font-size: 20px;
     transition: 0.4s;
     line-height: 50px;
@@ -220,7 +233,7 @@ body {
 
     border-radius: 10px;
 
-    background: rgba(45, 99, 139, 0.48);
+    background: var(--primary-color);
 
     visibility: hidden;
 
@@ -254,7 +267,7 @@ section {
     height: 60px;
 
     border-radius: 5px;
-    border: #DF00FF 1px solid;
+    border: var(--text-color) 1px solid;
 
     list-style: none;
 
@@ -265,15 +278,19 @@ section {
 }
 
 .bookmark-item:hover {
-    background: rgba(45, 99, 139, 0.48);
+    background: var(--background-color);
 }
 
 .bookmark-item .bookmark-title {
     font-size: 30px;
-    color: #DF00FF;
+    color: var(--text-color);
 }
 
 .bookmark-item .bookmark-link {
     font-size: 20px;
-    color: #DF00FF;
+    color: var(--text-color);
+}
+
+input::placeholder {
+    color: var(--hint-color);
 }
