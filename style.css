@@ -6,11 +6,28 @@ body, html {
 body {
     font-family: "JetBrains Mono ExtraBold", sans-serif;
 
-    background: #0B1014 url("res/jinx-toy-8k.png");
+    background: #0B1014;
     background-size: cover;
     background-repeat: no-repeat;
 
+    overflow: hidden;
+
     height: 100vh;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100vh;
+    width: auto;
+    opacity: 0;
+    z-index: -2;
+
+    transition: opacity 0.5s ease-in;
 }
 
 .overlay {
@@ -31,8 +48,10 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#quickaccess {
+.quickaccess {
     all: unset;
+
+    position: absolute;
 
     box-sizing: border-box;
     outline: none;
@@ -52,6 +71,17 @@ body {
     height: 30vh;
 
     visibility: visible;
+}
+
+.quickaccess::before {
+    content: "   ";
+    font-size: inherit;
+    display: inline-block;
+}
+
+#quickaccess-suggestion {
+    color: rgba(108, 127, 152, 0.55);
+    z-index: -1;
 }
 
 .search-box {
@@ -205,6 +235,8 @@ section {
     right: 0;
     height: 100vh;
     width: 100vw;
+
+    visibility: hidden;
 }
 
 #bookmark-list.active {

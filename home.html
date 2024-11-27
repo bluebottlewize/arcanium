@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>arcanium</title>
     
+    <link rel="preload" fetchpriority="high" as="image" href="res/jinx-toy-8k.png" type="image/png">
+    <link rel="icon" href="data:;base64,=">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -16,10 +18,13 @@
     </li>
 </template>
 
+<img src="res/jinx-toy-8k.png" id="background" onload="this.style.opacity=1">
+
 <div id="overlay" class="overlay"></div>
 
 <div id="quickaccess-container">
-    <input type="text" id="quickaccess">
+    <input type="text" id="quickaccess" class="quickaccess">
+    <input type="text" id="quickaccess-suggestion" class="quickaccess">
 </div>
 
 <div id="query-container">
