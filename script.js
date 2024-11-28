@@ -33,6 +33,59 @@ let isDialogActive = false;
 
 // util functions
 
+function isValidHttpUrl(query)
+{
+    let url;
+
+    try
+    {
+        url = new URL(query);
+    } catch (_)
+    {
+        return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+}
+
+function isValidDomain(query)
+{
+    const urlRegex = /^(((http|https):\/\/|)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?)$/;
+    return urlRegex.test(query);
+}
+
+function searchDuckDuckGo(query)
+{
+    if (isValidHttpUrl(query))
+    {
+        window.location.href = query;
+    }
+    else if (isValidDomain(query))
+    {
+        window.location.href = "https://" + query;
+    }
+    else
+    {
+        window.location.href = "https://duckduckgo.com/?q=" + query;
+    }
+}
+
+function searchGoogle(query)
+{
+    if (isValidHttpUrl(query))
+    {
+        window.location.href = query;
+    }
+    else if (isValidDomain(query))
+    {
+        window.location.href = "https://" + query;
+    }
+    else
+    {
+        window.location.href = "https://google.com/search?q=" + query;
+    }
+}
+
 function findKeyStartingWith(input)
 {
     if (!input)
@@ -251,14 +304,14 @@ document.addEventListener("keydown", function (event)
             let query = searchinput.value;
             console.log(query);
             closeEverything();
-            window.location.href = "https://google.com/search?q=" + query;
+            searchGoogle(query);
         }
         else if (event.key === "Enter")
         {
             let query = searchinput.value;
             console.log(query);
             closeEverything();
-            window.location.href = "https://duckduckgo.com/?q=" + query;
+            searchDuckDuckGo(query);
         }
     }
     else if (activeFragment === BOOKMARK_FRAGMENT)
