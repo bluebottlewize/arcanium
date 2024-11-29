@@ -15,7 +15,7 @@ const quickaccessSuggestion = document.querySelector('#quickaccess-suggestion');
 const searchbox = document.querySelector('#search-box');
 const searchinput = document.querySelector('#search-input');
 const bookmarklist = document.querySelector('#bookmark-list');
-const dialog = document.querySelector('#dialog');
+const addbookmarks = document.querySelector('#bookmark-add-container');
 const keyinput = document.querySelector('#keyword-input');
 const urlinput = document.querySelector('#url-input');
 
@@ -177,7 +177,7 @@ function closeEverything()
     qaoverlay.classList.remove("active");
     queryoverlay.classList.remove("active");
     searchbox.classList.remove("active");
-    dialog.classList.remove("active");
+    addbookmarks.classList.remove("active");
     bookmarklist.classList.remove("active");
 
     searchinput.value = "";
@@ -213,7 +213,7 @@ function openBookmarkList()
     activeFragment = BOOKMARK_FRAGMENT;
 
     overlay.classList.add("active");
-    dialog.classList.add("active");
+    addbookmarks.classList.add("active");
     bookmarklist.classList.add("active");
 
     showFilteredBookmarks("");
