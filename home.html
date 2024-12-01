@@ -18,6 +18,12 @@
     </li>
 </template>
 
+<template id="search-item-template">
+    <li class="search-item">
+        <div class="search-suggestion"></div>
+    </li>
+</template>
+
 <img src="res/jinx-toy-8k.png" id="background" onload="this.style.opacity=1">
 
 <div id="overlay" class="overlay"></div>
@@ -28,13 +34,17 @@
 </div>
 
 <div id="query-container">
-    <div id="search-box" class="search-box">
-        <input id="search-input" class="search-input" type="text" name="" placeholder="Search">
-        <button class="search-button" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="bi bi-search">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-        </button>
+    <div id="search" class="search">
+        <div id="search-box" class="search-box">
+            <input id="search-input" class="search-input" type="text" name="" placeholder="Search">
+            <button class="search-button" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="bi bi-search">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </button>
+        </div>
+        <ul id="suggestions-list" class="suggestions-list">
+        </ul>
     </div>
 </div>
 
@@ -50,10 +60,10 @@
                 Add Bookmark
             </div>
             <div id="dialog" class="dialog">
-                <div id="keyword-box" class="search-box">
+                <div id="keyword-box" class="bookmark-box">
                     <input id="keyword-input" class="search-input" type="text" name="" placeholder="keyword">
                 </div>
-                <div id="url-box" class="search-box">
+                <div id="url-box" class="bookmark-box">
                     <input id="url-input" class="search-input" type="text" name="" placeholder="with https://">
                 </div>
             </div>

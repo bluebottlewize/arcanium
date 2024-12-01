@@ -1,5 +1,7 @@
 console.log('Happy developing ✨')
 
+const googleAutocompleteAPI = 'https://cors-anywhere.herokuapp.com/https://suggestqueries.google.com/complete/search?client=firefox&q=';
+
 let urlMap = new Map([
     ["github", "https://www.github.com"],
     ["youtube", "https://www.youtube.com"],
@@ -12,9 +14,11 @@ const queryoverlay = document.querySelector('#query-container');
 const quickaccess = document.querySelector('#quickaccess');
 const quickaccessSuggestion = document.querySelector('#quickaccess-suggestion');
 
-const searchbox = document.querySelector('#search-box');
+const search = document.querySelector('#search');
+const searchBox = document.querySelector('#search-box');
 const searchinput = document.querySelector('#search-input');
 const bookmarklist = document.querySelector('#bookmark-list');
+const suggestionslist = document.querySelector('#suggestions-list');
 const addbookmarks = document.querySelector('#bookmark-add-container');
 const keyinput = document.querySelector('#keyword-input');
 const urlinput = document.querySelector('#url-input');
@@ -120,11 +124,43 @@ function getUrls()
     }
 }
 
+function getSuggestions(query)
+{
+    fetch(googleAutocompleteAPI + query)
+        .then(response =>
+        {
+            if (!response.ok)
+            {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data =>
+        {
+            console.log(data);
+            showSearchSuggestions(data["1"]);
+        })
+        .catch(error =>
+        {
+            console.error('Error:', error);
+        });
+}
+
 function clearBookmarkList()
 {
     while (bookmarklist.lastElementChild)
     {
         bookmarklist.removeChild(bookmarklist.lastElementChild);
+    }
+}
+
+function clearSearchSuggestionsList()
+{
+    searchBox.classList.remove('suggestions-active');
+
+    while (suggestionslist.lastElementChild)
+    {
+        suggestionslist.removeChild(suggestionslist.lastElementChild);
     }
 }
 
@@ -162,6 +198,34 @@ function showFilteredBookmarks(filter)
     });
 }
 
+function showSearchSuggestions(suggestions)
+{
+    clearSearchSuggestionsList();
+
+    let searchItemTemplate = document.querySelector("#search-item-template");
+    console.log(searchItemTemplate);
+
+    console.log(suggestions);
+
+    if (suggestions.length === 0)
+    {
+        return;
+    }
+
+    suggestions.forEach((element, index) =>
+    {
+        let searchItemClone = searchItemTemplate.content.cloneNode(true);
+
+        const suggestionItem = searchItemClone.querySelector(".search-suggestion");
+        suggestionItem.innerText = element;
+        suggestionItem.setAttribute("data-suggestion", element);
+
+        suggestionslist.appendChild(searchItemClone);
+    });
+
+    searchBox.classList.add('suggestions-active');
+}
+
 getUrls();
 
 quickaccess.focus();
@@ -176,7 +240,7 @@ function closeEverything()
     overlay.classList.remove("active");
     qaoverlay.classList.remove("active");
     queryoverlay.classList.remove("active");
-    searchbox.classList.remove("active");
+    search.classList.remove("active");
     addbookmarks.classList.remove("active");
     bookmarklist.classList.remove("active");
 
@@ -201,7 +265,7 @@ function openSearch()
     activeFragment = SEARCH_FRAGMENT;
 
     overlay.classList.add("active");
-    searchbox.classList.add("active");
+    search.classList.add("active");
 
     searchinput.focus();
     console.log(event.key);
@@ -367,8 +431,34 @@ window.onload = function ()
     isQueryOverlayActive = true;
 
     overlay.classList.add("active");
-    searchbox.classList.add("active");
+    search.classList.add("active");
 
     searchinput.focus();
     console.log(event.key);
 }
+
+// todo add search suggestion
+// todo add settings page
+
+searchinput.addEventListener("input", function ()
+{
+    console.log(searchinput.value);
+    getSuggestions(searchinput.value);
+});
+
+document.body.addEventListener("click", (event) =>
+{
+    let query;
+    if (event.target.matches(".search-suggestion"))
+    {
+        query = event.target.getAttribute('data-suggestion');
+        closeEverything();
+        searchDuckDuckGo(query);
+    }
+    else if (event.target.matches(".search-item"))
+    {
+        query = event.target.querySelector('.search-suggestion').getAttribute('data-suggestion');
+        closeEverything();
+        searchDuckDuckGo(query);
+    }
+});
