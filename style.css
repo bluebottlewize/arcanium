@@ -129,6 +129,9 @@ body {
 .search-box {
     height: 50px;
     padding: 10px;
+
+    width: 40vw;
+    position: relative;
 }
 
 .search-box.suggestions-active {
@@ -144,8 +147,11 @@ body {
 }
 
 .search.active .search-input {
-    width: 80vh;
+    width: calc(40vw - 70px);
     padding: 0 6px;
+
+    position: absolute;
+    left: 10px;
 
     opacity: 1;
 }
@@ -159,7 +165,8 @@ body {
 
 .search-button {
     color: var(--background-color);
-    float: right;
+    position: absolute;
+    right: 10px;
     width: 50px;
     height: 50px;
     border-width: 3px;
@@ -391,4 +398,49 @@ section {
 
 input::placeholder {
     color: var(--hint-color);
+}
+
+/*      Settings Page       */
+
+.settings-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 80%;
+    width: 50%;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    transition: visibility 0.4s, opacity 0.4s;
+}
+
+.settings-container.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.settings-title {
+    font-size: 70px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.settings-list {
+    padding: 0;
+    margin: 20px 0 0;
+
+    border-radius: 10px;
+    background: var(--primary-color);
+
+    height: 100%;
+    width: 100%;
 }

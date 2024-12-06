@@ -437,9 +437,6 @@ window.onload = function ()
     console.log(event.key);
 }
 
-// todo add search suggestion
-// todo add settings page
-
 searchinput.addEventListener("input", function ()
 {
     console.log(searchinput.value);
@@ -462,3 +459,10 @@ document.body.addEventListener("click", (event) =>
         searchDuckDuckGo(query);
     }
 });
+
+// todo add arrow navigation to suggestions
+// todo add settings page
+// todo add option to turn off search suggestions
+// todo add option for cors bypass link, search suggestion api link
+// todo add add, delete buttons to bookmarks
+// todo optimize page for different screen sizes
